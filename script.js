@@ -7,8 +7,9 @@
   const year = document.querySelector("[data-year]");
   const feedback = document.querySelector("[data-form-feedback]");
   const form = document.querySelector("[data-contact-form]");
-  const cards = [...document.querySelectorAll("[data-review-card]")];
-  let currentReview = 0;
+  const caseCards = [...document.querySelectorAll("[data-case-card]")];
+  const caseDots = [...document.querySelectorAll("[data-case-index]")];
+  let currentCase = 0;
 
   const translations = {
     uk: {
@@ -16,16 +17,16 @@
       menuOpen: "Відкрити меню",
       menuClose: "Закрити меню",
       formReady: "Відкриваємо вашу поштову програму, щоб надіслати заявку.",
-      reviewPrevious: "Попередній відгук",
-      reviewNext: "Наступний відгук",
+      reviewPrevious: "Попередні принципи",
+      reviewNext: "Наступні принципи",
     },
     en: {
       title: "Advertising Agency — Business Strategy & Growth",
       menuOpen: "Open menu",
       menuClose: "Close menu",
       formReady: "Opening your email app to send the inquiry.",
-      reviewPrevious: "Previous review",
-      reviewNext: "Next review",
+      reviewPrevious: "Previous principles",
+      reviewNext: "Next principles",
     },
   };
 
@@ -49,6 +50,9 @@
     document.querySelectorAll("[data-placeholder-uk][data-placeholder-en]").forEach((element) => {
       element.placeholder = element.getAttribute(`data-placeholder-${nextLanguage}`);
     });
+    document.querySelectorAll("[data-alt-uk][data-alt-en]").forEach((element) => {
+      element.alt = element.getAttribute(`data-alt-${nextLanguage}`);
+    });
     if (languageButton) {
       languageButton.textContent = nextLanguage === "uk" ? "EN" : "UA";
       languageButton.setAttribute("aria-label", nextLanguage === "uk" ? "Switch to English" : "Перемкнути на українську");
@@ -63,15 +67,18 @@
     try { localStorage.setItem("agency-language", nextLanguage); } catch { /* Storage may be unavailable in a private browser context. */ }
   }
 
-  function showReview(index) {
-    if (!cards.length) return;
-    currentReview = (index + cards.length) % cards.length;
-    cards.forEach((card, cardIndex) => {
-      card.classList.toggle("is-active", cardIndex === currentReview);
-      card.setAttribute("aria-hidden", cardIndex === currentReview ? "false" : "true");
+  function showCase(index) {
+    if (!caseCards.length) return;
+    currentCase = (index + caseCards.length) % caseCards.length;
+    caseCards.forEach((card, cardIndex) => {
+      const active = cardIndex === currentCase;
+      card.classList.toggle("is-active", active);
+      card.setAttribute("aria-hidden", String(!active));
     });
-    const counter = document.querySelector("[data-review-current]");
-    if (counter) counter.textContent = String(currentReview + 1).padStart(2, "0");
+    caseDots.forEach((dot, dotIndex) => {
+      if (dotIndex === currentCase) dot.setAttribute("aria-current", "true");
+      else dot.removeAttribute("aria-current");
+    });
   }
 
   function closeMenu() {
@@ -101,27 +108,47 @@
     }
   });
 
-  nav?.querySelectorAll("a").forEach((link) => link.addEventListener("click", closeMenu));
-  document.querySelector("[data-review-prev]")?.addEventListener("click", () => showReview(currentReview - 1));
-  document.querySelector("[data-review-next]")?.addEventListener("click", () => showReview(currentReview + 1));
+  nav?.querySelectorAll("a").forEach((link) => {
+    link.addEventListener("click", closeMenu);
+    const target = new URL(link.href, window.location.href);
+    if (target.pathname === window.location.pathname && !target.hash) link.setAttribute("aria-current", "page");
+  });
+  const reviewStage = document.querySelector(".agency-home .review-stage");
+  function scrollReviewStrip(direction) {
+    const card = reviewStage?.querySelector(".agency-review");
+    if (!reviewStage || !card) return;
+    const gap = parseFloat(getComputedStyle(reviewStage).columnGap) || 14;
+    reviewStage.scrollBy({ left: direction * (card.getBoundingClientRect().width + gap), behavior: "smooth" });
+  }
+  document.querySelector("[data-review-prev]")?.addEventListener("click", () => scrollReviewStrip(-1));
+  document.querySelector("[data-review-next]")?.addEventListener("click", () => scrollReviewStrip(1));
+  document.querySelector("[data-case-prev]")?.addEventListener("click", () => showCase(currentCase - 1));
+  document.querySelector("[data-case-next]")?.addEventListener("click", () => showCase(currentCase + 1));
+  caseDots.forEach((dot) => dot.addEventListener("click", () => showCase(Number(dot.dataset.caseIndex))));
 
   form?.addEventListener("submit", (event) => {
     event.preventDefault();
     if (!form.reportValidity()) return;
     const values = new FormData(form);
     const name = String(values.get("name") || "").trim();
+    const surname = String(values.get("surname") || "").trim();
     const phone = String(values.get("phone") || "").trim();
+    const website = String(values.get("website") || "").trim();
     const message = String(values.get("message") || "").trim();
     const method = String(values.get("service") || "");
     const privacyConsent = form.elements.namedItem("privacy-consent")?.checked;
+    const newsletter = form.elements.namedItem("newsletter")?.checked;
     const email = String(values.get("email") || "").trim();
     const subject = document.documentElement.lang === "uk" ? "Запит на рекламні послуги" : "Advertising services inquiry";
     const body = [
-      `${document.documentElement.lang === "uk" ? "Ім’я" : "Name"}: ${name}`,
+      `${document.documentElement.lang === "uk" ? "Ім’я" : "First name"}: ${name}`,
+      `${document.documentElement.lang === "uk" ? "Прізвище" : "Last name"}: ${surname}`,
       `${document.documentElement.lang === "uk" ? "Телефон" : "Phone"}: ${phone}`,
+      `${document.documentElement.lang === "uk" ? "Сайт компанії" : "Company website"}: ${website || "—"}`,
       `${document.documentElement.lang === "uk" ? "Email" : "Email"}: ${email}`,
       `${document.documentElement.lang === "uk" ? "Напрям" : "Service"}: ${method}`,
       `${document.documentElement.lang === "uk" ? "Згода з політикою конфіденційності" : "Privacy policy consent"}: ${privacyConsent ? "yes" : "no"}`,
+      `${document.documentElement.lang === "uk" ? "Підписка на розсилку" : "Newsletter opt-in"}: ${newsletter ? "yes" : "no"}`,
       `${document.documentElement.lang === "uk" ? "Повідомлення" : "Message"}: ${message || "—"}`,
     ].join("\n");
     feedback.textContent = translations[document.documentElement.lang].formReady;
@@ -129,7 +156,7 @@
   });
 
   if (year) year.textContent = new Date().getFullYear();
-  showReview(0);
+  showCase(0);
   let preferredLanguage = "uk";
   try { preferredLanguage = localStorage.getItem("agency-language") || "uk"; } catch { /* Keep Ukrainian as the default. */ }
   setLanguage(preferredLanguage);
