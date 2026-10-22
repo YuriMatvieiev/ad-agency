@@ -1,7 +1,7 @@
 /* Home page layout follows the supplied agency reference: dark hero, alternating sections, photo CTA and dark footer. */
 .agency-home{background:#fff;color:#182b40}
 .agency-home .wrap{width:min(1580px,calc(100% - 15.5vw))}
-.agency-home .agency-hero{min-height:760px;height:min(900px,92svh);padding:105px 0 25px}
+.agency-home .agency-hero{height:auto;min-height:0;padding:76px 0 34px}
 
 /* Header and compact brand */
 .agency-home .site-header{height:76px;background:#082435;backdrop-filter:none}
@@ -19,7 +19,7 @@
 
 /* Hero */
 .agency-home .agency-hero-overlay{background:linear-gradient(90deg,rgba(8,29,46,.94),rgba(8,29,46,.8) 58%,rgba(8,29,46,.62)),linear-gradient(0deg,rgba(8,29,46,.55),transparent 35%)}
-.agency-home .agency-hero-inner{display:block;min-height:680px;padding-top:185px}
+.agency-home .agency-hero-inner{display:block;min-height:0;padding-top:clamp(48px,12svh,110px)}
 .agency-home .agency-hero-copy{max-width:1050px}
 .agency-home .agency-kicker{font-size:11px;margin-bottom:14px}
 .agency-home .agency-hero h1{max-width:1050px;font-size:clamp(48px,4.2vw,76px);line-height:1.1;letter-spacing:-.045em}
@@ -264,8 +264,8 @@
 /* Tablet and mobile */
 @media(max-width:1100px){
   .agency-home .wrap{width:calc(100% - 48px)}
-  .agency-home .agency-hero{height:auto;min-height:760px}
-  .agency-home .agency-hero-inner{min-height:620px;padding-top:150px}
+  .agency-home .agency-hero{height:auto;min-height:0}
+  .agency-home .agency-hero-inner{min-height:0;padding-top:clamp(42px,10svh,90px)}
   .agency-home .agency-about-grid{column-gap:30px}
   .agency-home .agency-about-intro{column-gap:30px}
   .agency-home .agency-about-photo{height:auto}
@@ -299,8 +299,8 @@
   .agency-home .nav-actions{gap:10px}
   .agency-home .nav-actions .button{display:none}
   .agency-home .language-toggle{margin-left:auto}
-  .agency-home .agency-hero{min-height:590px;height:auto;padding:88px 0 20px}
-  .agency-home .agency-hero-inner{min-height:420px;padding-top:36px}
+  .agency-home .agency-hero{min-height:0;height:auto;padding:76px 0 24px}
+  .agency-home .agency-hero-inner{min-height:0;padding-top:36px}
   .agency-home .agency-hero h1{font-size:clamp(38px,10vw,52px)}
   .agency-home .agency-hero .hero-lead{font-size:14px}
   .agency-home .agency-hero-points{display:grid;grid-template-columns:1fr 1fr;gap:9px}
@@ -381,6 +381,7 @@
   .agency-home .agency-legal-links{grid-column:1/-1;grid-row:3;grid-template-columns:1fr 1fr}
   .agency-home .agency-legal-links h3{grid-column:1/-1}
 }
+
 @media(max-width:420px){
   .agency-home .agency-hero h1{font-size:35px}
   .agency-home .agency-service-grid,.agency-home .agency-feature-list,.agency-home .agency-tech .tech-list{grid-template-columns:1fr}
