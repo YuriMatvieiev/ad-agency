@@ -48,7 +48,7 @@
 }
 .agency-page.subpage .agency-mark svg text {
   fill: currentColor;
-  font: 800 31px Manrope, Arial, sans-serif;
+  font: 800 31px "Red Hat Display", Arial, sans-serif;
   letter-spacing: -3px;
 }
 .agency-page.subpage .agency-brand { gap: 9px; }
@@ -206,14 +206,6 @@
   transform: translateY(-4px);
   box-shadow: 0 12px 26px #18394c1c;
 }
-.agency-page.subpage .service-detail-grid article > span {
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  color: #8da0b2;
-  font-size: 12px;
-  font-weight: 800;
-}
 .agency-page.subpage .service-detail-grid article > svg {
   width: 30px;
   height: 30px;
@@ -245,16 +237,19 @@
   gap: 16px;
 }
 .agency-page.subpage .service-steps article {
+  position: relative;
   display: grid;
-  gap: 11px;
-  min-height: 150px;
+  align-content: start;
+  gap: 12px;
+  min-height: 0;
   padding: 22px;
-  border: 1px solid #31445b;
+  border: 1px solid #3a516b;
   border-radius: 6px;
-  background: #1c2a3e;
+  background: linear-gradient(145deg, #1c2a3e, #20314a);
 }
-.agency-page.subpage .service-steps b { color: #66c4ff; font-size: 15px; }
-.agency-page.subpage .service-steps span { color: #eef4f8; font-size: 14px; }
+.agency-page.subpage .service-steps article > svg { width: 40px; height: 40px; padding: 9px; border-radius: 9px; background: #29425d; color: #68c9ff; }
+.agency-page.subpage .service-steps h3 { margin: 0; color: #eef4f8; font-size: 17px; line-height: 1.35; }
+.agency-page.subpage .service-steps p { margin: 0; color: #bac8d7; font-size: 14px; line-height: 1.65; }
 
 /* Case gallery and performance story. */
 .agency-page.subpage .practice-case-grid {
@@ -460,4 +455,61 @@
   .agency-page.subpage .agency-footer-nav:nth-child(2),
   .agency-page.subpage .agency-footer-nav:nth-child(3),
   .agency-page.subpage .agency-legal-links { grid-column: 1; grid-row: auto; }
+}
+
+/* Keep the shared mobile navigation readable and clear of the page content. */
+@media(max-width: 700px) {
+  .agency-page.subpage .site-header { z-index: 40; background: #101a2d; backdrop-filter: none; }
+  .agency-page.subpage .nav-actions { order: 2; gap: 8px; margin: 0 0 0 auto; }
+  .agency-page.subpage .language-toggle {
+    display: grid;
+    place-items: center;
+    min-width: 38px;
+    height: 38px;
+    margin: 0;
+    padding: 0 7px;
+    border: 1px solid rgba(255,255,255,.35);
+    border-radius: 5px;
+    font-size: 11px;
+  }
+  .agency-page.subpage .menu-toggle {
+    order: 3;
+    width: 40px;
+    height: 40px;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    padding: 8px;
+    border: 1px solid rgba(255,255,255,.35);
+    border-radius: 5px;
+  }
+  .agency-page.subpage .primary-nav {
+    position: fixed;
+    inset: 66px 0 0;
+    z-index: 39;
+    width: 100%;
+    min-height: calc(100dvh - 66px);
+    overflow-y: auto;
+    padding: 22px max(24px, calc((100vw - 560px) / 2)) env(safe-area-inset-bottom);
+    background: #101a2d;
+    box-shadow: 0 18px 30px #06162266;
+  }
+  .agency-page.subpage .primary-nav.is-open { display: flex; }
+  .agency-page.subpage .primary-nav a { padding: 18px 2px; font-size: 17px; }
+  .agency-page.subpage .brand-copy strong { font-size: 9px; }
+  .agency-page.subpage .brand-copy small { font-size: 8px; }
+  .agency-page.subpage .eyebrow { font-size: 11px; }
+  .agency-page.subpage .content-note,
+  .agency-page.subpage .policy-updated { font-size: 13px; line-height: 1.6; }
+  .agency-page.subpage .page-hero-content > p:last-child,
+  .agency-page.subpage .split-intro > div + div > p:not(.body-large),
+  .agency-page.subpage .about-image-band > div > p:not(.eyebrow),
+  .agency-page.subpage .about-pillars p,
+  .agency-page.subpage .service-detail-grid p,
+  .agency-page.subpage .practice-case-grid p,
+  .agency-page.subpage .legal-copy p { font-size: 15px; line-height: 1.75; }
+  .agency-page.subpage .agency-footer-brand p,
+  .agency-page.subpage .agency-footer-nav a,
+  .agency-page.subpage .agency-footer-nav > span { font-size: 13px; }
+  .agency-page.subpage .agency-footer-bottom { font-size: 11px; }
 }
