@@ -52,13 +52,13 @@
 .agency-home .agency-feature-list span{gap:3px}
 .agency-home .agency-feature-list strong{font-size:14px;color:#248ccc}
 .agency-home .agency-feature-list small{font-size:11px;line-height:1.5}
-.agency-home .agency-about-photo{grid-column:2;grid-row:2;position:relative;min-height:0;height:460px;align-self:stretch;margin-top:0;border-radius:6px;overflow:visible}
-.agency-home .agency-about-photo>img{width:100%;height:100%;min-height:0;object-fit:cover;border-radius:6px}
+.agency-home .agency-about-photo{grid-column:2;grid-row:2;position:relative;min-height:0;height:auto;align-self:stretch;margin-top:0;border-radius:6px;overflow:visible}
+.agency-home .agency-about-photo>img{display:block;width:100%;height:460px;min-height:0;object-fit:cover;border-radius:6px}
 .agency-home .agency-about-photo .photo-caption{display:none}
-.agency-home .ref-photo-stats{position:absolute;z-index:2;top:18px;left:18px;right:18px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));padding:12px 14px;background:rgba(20,41,61,.92);border:1px solid rgba(255,255,255,.16);border-radius:6px;color:#fff;box-shadow:0 8px 24px #0c203544;backdrop-filter:blur(8px)}
-.agency-home .ref-photo-stats span{display:grid;grid-template-columns:1fr;place-items:center;padding:0 12px;border-right:1px solid #ffffff35;text-align:center}
+.agency-home .ref-photo-stats{position:static;z-index:2;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));margin-top:12px;padding:14px;background:#f2f9fc;border:1px solid #c4ddeb;border-radius:6px;color:#20364b}
+.agency-home .ref-photo-stats span{display:grid;grid-template-columns:1fr;place-items:center;padding:0 12px;border-right:1px solid #c4ddeb;text-align:center}
 .agency-home .ref-photo-stats span:last-child{border:0}
-.agency-home .ref-photo-stats small{font-size:10px;line-height:1.35;color:#e5eff5}
+.agency-home .ref-photo-stats small{font-size:14px;line-height:1.45;color:#405a70}
 
 /* Four primary services */
 .agency-home .agency-services{background:#f2f9fc;padding:95px 0 88px}
@@ -268,7 +268,7 @@
   .agency-home .agency-hero-inner{min-height:620px;padding-top:150px}
   .agency-home .agency-about-grid{column-gap:30px}
   .agency-home .agency-about-intro{column-gap:30px}
-  .agency-home .agency-about-photo{height:390px}
+  .agency-home .agency-about-photo{height:auto}
   .agency-home .agency-service-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
   .agency-home .agency-cases .wrap{grid-template-columns:.8fr 1.2fr;gap:18px 28px}
   .agency-home .agency-tech-grid{gap:32px}
@@ -315,10 +315,11 @@
   .agency-home .agency-feature-list>div{min-height:76px;padding:10px}
   .agency-home .agency-feature-list strong{font-size:11px}
   .agency-home .agency-feature-list small{font-size:9px}
-  .agency-home .agency-about-photo{height:270px;margin-top:8px}
-  .agency-home .ref-photo-stats{top:10px;left:10px;right:10px;padding:8px 4px}
+  .agency-home .agency-about-photo{height:auto;margin-top:8px}
+  .agency-home .agency-about-photo>img{height:270px}
+  .agency-home .ref-photo-stats{margin-top:9px;padding:10px 6px}
   .agency-home .ref-photo-stats span{padding:0 5px}
-  .agency-home .ref-photo-stats small{font-size:7px}
+  .agency-home .ref-photo-stats small{font-size:12px}
   .agency-home .agency-services{padding:62px 0}
   .agency-home .agency-services .section-heading{margin-bottom:28px}
   .agency-home .agency-services .heading-aside{font-size:12px}
