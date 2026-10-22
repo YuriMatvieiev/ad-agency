@@ -1,7 +1,7 @@
 /* Home page layout follows the supplied agency reference: dark hero, alternating sections, photo CTA and dark footer. */
 .agency-home{background:#fff;color:#182b40}
 .agency-home .wrap{width:min(1580px,calc(100% - 15.5vw))}
-.agency-home .agency-hero{height:auto;min-height:0;padding:76px 0 34px}
+.agency-home .agency-hero{height:auto;min-height:100vh;min-height:100svh;padding:76px 0 34px}
 
 /* Header and compact brand */
 .agency-home .site-header{height:76px;background:#082435;backdrop-filter:none}
@@ -264,7 +264,7 @@
 /* Tablet and mobile */
 @media(max-width:1100px){
   .agency-home .wrap{width:calc(100% - 48px)}
-  .agency-home .agency-hero{height:auto;min-height:0}
+  .agency-home .agency-hero{height:auto}
   .agency-home .agency-hero-inner{min-height:0;padding-top:clamp(42px,10svh,90px)}
   .agency-home .agency-about-grid{column-gap:30px}
   .agency-home .agency-about-intro{column-gap:30px}
@@ -299,7 +299,7 @@
   .agency-home .nav-actions{gap:10px}
   .agency-home .nav-actions .button{display:none}
   .agency-home .language-toggle{margin-left:auto}
-  .agency-home .agency-hero{min-height:0;height:auto;padding:76px 0 24px}
+  .agency-home .agency-hero{height:auto;padding:76px 0 24px}
   .agency-home .agency-hero-inner{min-height:0;padding-top:36px}
   .agency-home .agency-hero h1{font-size:clamp(38px,10vw,52px)}
   .agency-home .agency-hero .hero-lead{font-size:14px}
